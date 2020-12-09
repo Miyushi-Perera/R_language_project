@@ -1,0 +1,46 @@
+Liquid_Bodily_Excretion<-read.table(file="Liquid bodily excretion.txt",header=T)
+Liquid_Bodily_Excretion
+attach(Liquid_Bodily_Excretion)
+summary(Liquid_Bodily_Excretion)
+var(Liquid_Bodily_Excretion)
+range(Liquid_Bodily_Excretion)
+cor(Liquid_Bodily_Excretion,use="complete.obs")
+plot(Liquid_Bodily_Excretion)
+plot(gravity,urea)
+plot(ph,urea)
+plot(osmo,urea)
+plot(cond,urea)
+plot(calc,urea)
+shapiro.test(urea)
+par(mfrow=c(2,3))
+boxplot(urea,main="Urea concentration")
+text(266,quantile(urea),c("Min","Q1","Median","Q3","Max"))
+boxplot(gravity,main="Gravity")
+boxplot(ph,main="Ph reading")
+boxplot(osmo,main="Osmolality")
+boxplot(cond,main="Conductivity")
+boxplot(calc,main="Calcium concentration")
+Urea<-lm(urea~gravity+ph+osmo+cond+calc)
+anova(Urea)
+model is not significant/significant,if only one value is less than 0.05.we can conclude that the fitted model is significant
+summary(Urea)
+#hypothesis-coefficients-interprit the r squared value-()present of the total variation is expressed by the model 
+Urea1<-lm(urea~gravity+ph+osmo+cond)
+anova(Urea1)
+summary)Urea1)
+Urea2<-lm(urea~gravity+osmo+cond)
+anova(Urea2)
+summary(Urea2)
+library(car)
+vif(Urea2)
+plot(Urea2,1)
+plot(Urea2,2)
+durbinWatsonTest(Urea2)
+null=lm(urea~1)
+null
+full=lm(urea~.,data=Liquid_Bodily_Excretion)
+full
+step(null,scope=list(lower=null,upper=full),direction="both")
+
+
+
